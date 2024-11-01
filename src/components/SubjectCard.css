@@ -1,0 +1,18 @@
+/* SubjectCard.css */
+.subject-card {
+    width: 150px;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.subject-icon {
+    font-size: 2em;
+}
+
+.topic-count {
+    color: #555;
+    font-size: 0.9em;
+}
