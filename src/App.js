@@ -1,18 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import './App.css';
 import SubjectCard from './components/SubjectCard';
 import TopicPage from './components/TopicPage';
-
-const subjects = [
-    { icon: '🔬', title: 'Science', topicCount: 15 },
-    { icon: '📐', title: 'Math', topicCount: 10 },
-    { icon: '📜', title: 'History', topicCount: 8 },
-    //Will create list in database later. Only admin be able to add subjects. 
-]
+import axios from 'axios';
 
 const App = () => {
+    const [subjects, setSubjects] = useState([]);
+    // Capture user input from search bar
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const fetchSubjects = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/subjects');
+            console.log("Fetched Subjects: ", response.data)
+            setSubjects(response.data);
+        }catch(error){
+            console.error('Error fetching subjects: ', error);
+        }
+    };
+
+    // Fetch subjects when component mounts
+    useEffect(() => {
+        fetchSubjects();
+    }, []);
+
+    const filteredSubjects = subjects.filter(subject => 
+        subject.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
     // useNavigate for Subject card click, nav to Topics page of that Subject.
     const navigate = useNavigate();
     
@@ -21,14 +38,6 @@ const App = () => {
         navigate(`/topics/${title}`);
     };
     
-    // Filter subjects based on user input in the search bar
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const filteredSubjects = subjects.filter(subject =>
-            subject.title.toLowerCase().includes(searchTerm.toLocaleLowerCase())
-    );
-
-
     return (
         <div>
             {/* Set searchTerm state to capture user input in search bar. */}
