@@ -1,5 +1,3 @@
-// src/components/SubjectCard.js
-
 import React from "react";
 import './SubjectCard.css';
 

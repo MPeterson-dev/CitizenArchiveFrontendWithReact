@@ -1,8 +1,10 @@
-// src/components/NavBar.js
 import React from 'react';
 import './NavBar.css';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = ({ setSearchTerm }) => {
+    const navigate = useNavigate();
+    
     return ( 
         <nav className='navbar navbar-expand-lg bg-light'>
             <div className='container d-flex justify-content-between align-items-center'>
@@ -23,7 +25,7 @@ const NavBar = ({ setSearchTerm }) => {
 
                 {/* Login button */}
                 <div className='d-flex justify content-end'>
-                    <button className='btn btn-primary'>Login</button>
+                    <button className='btn btn-primary' onClick={() => navigate('/login')}>Login</button>
                 </div>
             </div>
         </nav>

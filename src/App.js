@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import NavBar from './components/NavBar';
+import NavBar from './components/Navbar/NavBar';
 import './App.css';
-import SubjectCard from './components/SubjectCard';
-import TopicPage from './components/TopicPage';
+import SubjectCard from './components/Subjects/SubjectCard';
+import TopicPage from './components/Navbar/TopicPage';
 import axios from 'axios';
+import Login from './components/User/Login';
+import Register from './components/User/Register';
 
 const App = () => {
     const [subjects, setSubjects] = useState([]);
@@ -42,7 +44,7 @@ const App = () => {
         <div>
             {/* Set searchTerm state to capture user input in search bar. */}
             <NavBar setSearchTerm={setSearchTerm} />
-            <main className='container mt-4'>
+            <main className='container-fluid d-flex justify-content-center align-items-center mt-4'>
                 <Routes>
                     {/* Home page with Subject Cards */}
                     <Route
@@ -65,6 +67,8 @@ const App = () => {
                     />
                     {/* Dynamic Topic Page Route, e.g., clicking Science card goes to /topics/Science */}
                     <Route path='/topics/:subject' element={<TopicPage />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/register' element={<Register />} />
                 </Routes>
             </main>
         </div>
