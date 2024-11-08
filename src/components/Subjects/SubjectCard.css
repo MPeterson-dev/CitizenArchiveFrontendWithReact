@@ -1,10 +1,15 @@
 .subject-card {
-    width: 150px;
-    margin: 10px;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    height: 200px; /* Set a fixed height for uniformity */
+    width: 200px; /* Ensures each card fits within its grid cell */
+    box-sizing: border-box;
 }
 
 .subject-icon {

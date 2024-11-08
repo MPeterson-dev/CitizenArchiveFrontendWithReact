@@ -1,1 +1,13 @@
+.main-container{
+    display: flex;
+    justify-content: center;
+}
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* dynamically adjusts columns */
+    gap: 10px 10px; /* row column */
+    width: 90vw; /* 90% viewport */
+}
+
 
