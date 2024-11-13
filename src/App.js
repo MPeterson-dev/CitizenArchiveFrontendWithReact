@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import NavBar from "./components/Navbar/NavBar";
 import "./App.css";
 import SubjectCard from "./components/Subjects/SubjectCard";
@@ -8,13 +8,16 @@ import axios from "axios";
 import Login from "./components/User/Login";
 import Register from "./components/User/Register";
 import DefaultCards from "./components/Subjects/DefaultCard";
+import AdminPage from "./components/Admin/AdminPage";
 
 const App = () => {
   const [subjects, setSubjects] = useState([]);
   // Capture user input from search bar
   const [searchTerm, setSearchTerm] = useState("");
   const [error, setError] = useState(false);
-
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+ 
   const fetchSubjects = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/subjects");
@@ -43,6 +46,12 @@ const App = () => {
     // Navigate to subjects topic page
     navigate(`/topics/${title}`);
   };
+
+  const handleLoginSuccess = (user) => {
+    setIsAuthenticated(true);
+    setIsAdmin(user.isAdmin); // Set if user is Admin
+    navigate("/"); // Redirect to homepage after successful login
+  }
 
   return (
     <div>
@@ -74,8 +83,10 @@ const App = () => {
           />
           {/* Dynamic Topic Page Route, e.g., clicking Science card goes to /topics/Science */}
           <Route path="/topics/:subject" element={<TopicPage />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess }/>} />
           <Route path="/register" element={<Register />} />
+          {/* Protected Admin Route */}
+          <Route path="/admin" element={isAuthenticated && isAdmin ? ( <AdminPage />) : (<Navigate to="/" />)} />
         </Routes>
         )}
         </main>

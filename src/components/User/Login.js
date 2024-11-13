@@ -1,9 +1,10 @@
+// Login.js (with email update from previous step)
 import React, { useState } from "react";
 import axios from "axios";
 import "./UserForms.css";
 
 const Login = ({ onLoginSuccess }) => {
-  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -11,13 +12,13 @@ const Login = ({ onLoginSuccess }) => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:5000/api/login", {
-        username,
+        email,
         password,
       });
       if (response.data.success) {
-        onLoginSuccess(response.data.user);
+        onLoginSuccess(response.data.user); // Pass user data with isAdmin
       } else {
-        setError("Invalid username or password.");
+        setError("Invalid email or password.");
       }
     } catch (err) {
       console.error(err);
@@ -32,10 +33,10 @@ const Login = ({ onLoginSuccess }) => {
         {error && <p>{error}</p>}
         <form onSubmit={handleSubmit}>
           <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUserName(e.target.value)}
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
           <input
