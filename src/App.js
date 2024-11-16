@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import NavBar from "./components/Navbar/NavBar";
 import "./App.css";
 import SubjectCard from "./components/Subjects/SubjectCard";
-import TopicPage from "./components/Navbar/TopicPage";
+import TopicsList from "./components/Topics/TopicsList";
 import axios from "axios";
 import Login from "./components/User/Login";
 import Register from "./components/User/Register";
@@ -73,7 +73,7 @@ const App = () => {
                     <SubjectCard
                       icon={subject.icon}
                       title={subject.title}
-                      topicCount={subject.topicCount}
+                      topic_count={subject.topic_count}
                       onClick={() => handleCardClick(subject.title)}
                     />
                   </div>
@@ -82,7 +82,7 @@ const App = () => {
             }
           />
           {/* Dynamic Topic Page Route, e.g., clicking Science card goes to /topics/Science */}
-          <Route path="/topics/:subject" element={<TopicPage />} />
+          <Route path="/topics/:subject" element={<TopicsList />} />
           <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess }/>} />
           <Route path="/register" element={<Register />} />
           {/* Protected Admin Route */}

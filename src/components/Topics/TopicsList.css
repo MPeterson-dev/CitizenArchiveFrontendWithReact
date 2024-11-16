@@ -1,0 +1,26 @@
+.topics-list-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.topics-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.topic-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.topic-title {
+    font-size: 1.5rem;
+    color: #007bff;
+}
+
+.topic-description {
+    font-size: 1rem;
+    color: #555;
+}
