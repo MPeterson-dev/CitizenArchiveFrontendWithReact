@@ -3,7 +3,7 @@ The Citizen Archive project demonstrates my ability to create a full-stack web a
 
 Purpose:
 
-This project highlights key concepts I mastered, including:
+This project highlights key concepts including:
 
 Frontend Development: React components, responsive UI with Bootstrap, and API integration.
 Backend Development: RESTful API creation with Node.js and Express.
