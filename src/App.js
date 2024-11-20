@@ -9,6 +9,7 @@ import Login from "./components/User/Login";
 import Register from "./components/User/Register";
 import DefaultCards from "./components/Subjects/DefaultCard";
 import AdminPage from "./components/Admin/AdminPage";
+import LessonPage from "./components/Lessons/LessonPage";
 
 const App = () => {
   const [subjects, setSubjects] = useState([]);
@@ -85,6 +86,7 @@ const App = () => {
           <Route path="/topics/:subject" element={<TopicsList />} />
           <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess }/>} />
           <Route path="/register" element={<Register />} />
+          <Route path="/lessons/:topicId" element={<LessonPage />} />
           {/* Protected Admin Route */}
           <Route path="/admin" element={isAuthenticated && isAdmin ? ( <AdminPage />) : (<Navigate to="/" />)} />
         </Routes>

@@ -1,0 +1,148 @@
+/* General container styling */
+.lesson-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Page title styling */
+.lesson-page-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #444;
+}
+
+/* Individual lesson card styling */
+.lesson-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect for lesson cards */
+.lesson-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Title styling inside the lesson card */
+.lesson-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+/* Description styling */
+.lesson-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Video container styling */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Aspect ratio for 16:9 videos */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: #000;
+}
+
+/* Responsive iframe for videos */
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Interactions (upvote, report) row */
+.lesson-interactions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+/* Upvote and report buttons */
+.lesson-interactions button {
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.lesson-interactions button:hover {
+    background-color: #0056b3;
+}
+
+/* Comments section */
+.lesson-comments {
+    margin-top: 30px;
+}
+
+.lesson-comments h3 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.lesson-comments ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lesson-comments li {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.lesson-comments form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.lesson-comments input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.lesson-comments button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.lesson-comments button:hover {
+    background-color: #218838;
+}
