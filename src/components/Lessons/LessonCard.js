@@ -38,8 +38,7 @@ const LessonCard = ({ lessonData }) => {
             </div>
 
             {/* Lesson details */}
-            <div className="lesson-details">
-                <h2>{title}</h2>
+            <div className="lesson-details">                
                 <p>{description}</p>
             </div>
 

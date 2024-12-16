@@ -14,7 +14,12 @@ const LessonPage = () => {
             try {
                 const response = await axios.get(`http://localhost:5000/api/lesson/${topicId}`);
                 console.log("Fetched lessons:", response.data);
-                setLessons([response.data]);
+
+                if (Array.isArray(response.data) && response.data.length > 0) {
+                    setLessons([response.data[0]]); // Display only the first lesson
+                } else {
+                    setLessons([]); // No lessons available
+                }
                 setError(false);
             } catch (err) {
                 console.error("Error fetching lessons:", err);
@@ -29,13 +34,13 @@ const LessonPage = () => {
         return <p>Error loading lessons. Please try again later.</p>;
     }
 
-    if (!lessons.length) {
+    if (lessons.length === 0) {
         return <p>No lessons available for this topic.</p>;
     }
 
     return (
         <div className="lesson-page-container">
-            <h2>Lessons</h2>
+            <h2>{lessons[0].title}</h2> {/* Display the lesson title */}
             {lessons.map((lesson) => (
                 <LessonCard key={lesson.id} lessonData={lesson} />
             ))}

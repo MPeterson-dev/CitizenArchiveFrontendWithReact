@@ -13,16 +13,6 @@ const NavBar = ({ setSearchTerm }) => {
           <img src="CALogo.png" alt="Logo" width="70" height="30" />
         </a>
 
-        {/* Search bar */}
-        <div className="d-flex flex-grow-1 justify-content-center">
-          <input
-            type="text"
-            className="form-control w-50"
-            placeholder="Search..."
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-
         {/* Login button */}
         <div className="d-flex justify content-end">
           <button

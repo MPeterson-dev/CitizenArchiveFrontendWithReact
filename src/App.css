@@ -1,13 +1,38 @@
-.main-container{
+/* Center the search bar and add spacing */
+.search-and-subjects {
     display: flex;
-    justify-content: center;
-}
-
-.subject-grid {
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    gap: 20px; /* Space between search bar and subject cards */
+    margin-top: 20px;
+  }
+  
+  /* Ensure the search bar takes an appropriate width */
+  .search-bar-container {
+    width: 100%;
+    max-width: 800px; /* Limit max width for responsiveness */
+  }
+  
+  .search-bar {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  .search-bar:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Subject grid styling */
+  .subject-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* dynamically adjusts columns */
-    gap: 10px 10px; /* row column */
-    width: 90vw; /* 90% viewport */
-}
-
-
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: 90%; /* Center the grid horizontally */
+    max-width: 1200px;
+  }
+  
