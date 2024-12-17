@@ -72,9 +72,7 @@ const App = () => {
             <DefaultCards />
           ) : (
             <Routes>
-              <Route
-                path="/"
-                element={
+              <Route path="/" element={
                   <div className="subject-grid">
                     {filteredSubjects.map((subject, index) => (
                       <div key={index}>
@@ -92,13 +90,8 @@ const App = () => {
               <Route path="/topics/:subject" element={<TopicsList />} />
               <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/lessons/:topicId" element={<LessonPage />} />
-              <Route
-                path="/admin"
-                element={
-                  isAuthenticated && isAdmin ? <AdminPage /> : <Navigate to="/" />
-                }
-              />
+              <Route path="/lessons/:topicId" element={<LessonPage currentUser={isAuthenticated ? user?.email : null }/>} />
+              <Route path="/admin" element={isAuthenticated && isAdmin ? <AdminPage /> : <Navigate to="/" />}/>
             </Routes>
           )}
         </div>

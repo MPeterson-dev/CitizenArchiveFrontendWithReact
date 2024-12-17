@@ -32,3 +32,9 @@
     font-size: 0.9rem;
     color: #555;
 }
+
+h2 {
+    margin: 0 auto; 
+    width: fit-content; 
+    padding-bottom: 10px;
+}

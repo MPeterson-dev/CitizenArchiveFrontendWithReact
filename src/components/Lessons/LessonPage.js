@@ -4,7 +4,7 @@ import axios from "axios";
 import LessonCard from "./LessonCard";
 import "./LessonPage.css";
 
-const LessonPage = () => {
+const LessonPage = ({ currentUser }) => { // Destructure properly here
     const { topicId } = useParams(); // Get topic ID from URL
     const [lessons, setLessons] = useState([]);
     const [error, setError] = useState(false);
@@ -42,7 +42,7 @@ const LessonPage = () => {
         <div className="lesson-page-container">
             <h2>{lessons[0].title}</h2> {/* Display the lesson title */}
             {lessons.map((lesson) => (
-                <LessonCard key={lesson.id} lessonData={lesson} />
+                <LessonCard key={lesson.id} lessonData={lesson} currentUser={currentUser} />
             ))}
         </div>
     );

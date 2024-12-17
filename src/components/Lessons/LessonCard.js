@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./LessonCard.css";
 
-const LessonCard = ({ lessonData, isAuthenticated, currentUser }) => {
+const LessonCard = ({ lessonData, currentUser }) => {
     const { id, title, description, video_url } = lessonData;
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
+    const [upvotes, setUpvotes] = useState(0); // Track upvotes
 
     // Fetch comments for the lesson
     useEffect(() => {
@@ -19,6 +20,22 @@ const LessonCard = ({ lessonData, isAuthenticated, currentUser }) => {
         };
         fetchComments();
     }, [id]);
+
+    // Handle Upvote
+    const handleUpvote = () => {
+        setUpvotes((prev) => prev + 1); // Placeholder logic for upvote
+    };
+
+    // Handle Report
+    const handleReport = () => {
+        alert("Lesson reported for review.");
+    };
+
+    // Handle Share
+    const handleShare = () => {
+        navigator.clipboard.writeText(window.location.href); // Copy lesson URL
+        alert("Lesson link copied to clipboard!");
+    };
 
     // Submit a new comment
     const handleCommentSubmit = async (e) => {
@@ -37,9 +54,8 @@ const LessonCard = ({ lessonData, isAuthenticated, currentUser }) => {
             });
 
             if (response.data.success) {
-                // Append the new comment to the comments array
                 setComments([...comments, { username: currentUser, text: newComment.trim(), created_at: new Date().toISOString() }]);
-                setNewComment(""); // Clear the input
+                setNewComment("");
             }
         } catch (err) {
             console.error("Error adding comment:", err);
@@ -50,16 +66,24 @@ const LessonCard = ({ lessonData, isAuthenticated, currentUser }) => {
         <div className="lesson-card">
             {/* Video Area */}
             <div className="video-container">
-                <iframe
-                    src={video_url}
-                    title={title}
-                    frameBorder="0"
-                    allowFullScreen
-                ></iframe>
+                <iframe src={video_url} title={title} frameBorder="0" allowFullScreen></iframe>
+            </div>
+
+            {/* Interaction Buttons */}
+            <div className="lesson-buttons">
+                <button className="upvote-button" onClick={handleUpvote}>
+                    👍 Upvote {upvotes}
+                </button>
+                <button className="report-button" onClick={handleReport}>
+                    🚩 Report
+                </button>
+                <button className="share-button" onClick={handleShare}>
+                    🔗 Share
+                </button>
             </div>
 
             {/* Lesson Details */}
-            <div className="lesson-details">                
+            <div className="lesson-details">
                 <p>{description}</p>
             </div>
 
@@ -74,8 +98,8 @@ const LessonCard = ({ lessonData, isAuthenticated, currentUser }) => {
                     ))}
                 </ul>
 
-                {/* Show the comment form only if the user is authenticated */}
-                {isAuthenticated ? (
+                {/* Comment Form */}
+                {currentUser ? (
                     <form onSubmit={handleCommentSubmit}>
                         <textarea
                             placeholder="Add a comment..."

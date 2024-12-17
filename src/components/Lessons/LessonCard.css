@@ -1,21 +1,20 @@
 .lesson-card {
-    width: 100%;
-    max-width: 800px;
-    margin: 20px auto;
+    width: 40vw; /* 40% of the viewport width */
+    margin: 20px auto; /* Center horizontally */
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Video Area */
 .video-container {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
     height: 0;
     overflow: hidden;
     margin-bottom: 20px;
-    background-color: #000;
 }
 
 .video-container iframe {
@@ -26,53 +25,108 @@
     height: 100%;
 }
 
-.lesson-details {
-    margin-bottom: 20px;
-}
-
-.lesson-details h2 {
-    margin: 0 0 10px;
-}
-
-.lesson-details p {
-    margin: 0;
-    color: #555;
-}
-
-.lesson-interactions {
+/* Buttons Row */
+.lesson-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 20px;
 }
 
-.upvote-button,
-.report-button {
+.lesson-buttons button {
     padding: 10px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .upvote-button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #28a745;
+    color: white;
+}
+
+.upvote-button:hover {
+    background-color: #218838;
 }
 
 .report-button {
-    background-color: #ff4d4d;
-    color: #fff;
+    background-color: #dc3545;
+    color: white;
+}
+
+.report-button:hover {
+    background-color: #c82333;
+}
+
+.share-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.share-button:hover {
+    background-color: #0056b3;
+}
+
+/* Lesson Details */
+.lesson-details h2 {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.lesson-details p {
+    color: #555;
+    text-align: left;
+}
+
+/* Comments Section */
+.lesson-comments {
+    margin-top: 20px;
+}
+
+.lesson-comments h3 {
+    margin-bottom: 10px;
+    text-align: left;
 }
 
 .lesson-comments ul {
     list-style: none;
     padding: 0;
-    margin-bottom: 10px;
 }
 
 .lesson-comments li {
-    margin-bottom: 5px;
-    padding: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
     background-color: #f9f9f9;
     border-radius: 4px;
     border: 1px solid #ddd;
+}
+
+.lesson-comments form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.lesson-comments textarea {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    resize: none;
+    height: 80px;
+}
+
+.lesson-comments button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.lesson-comments button:hover {
+    background-color: #0056b3;
 }

@@ -25,6 +25,16 @@ const Login = ({ onLoginSuccess }) => {
     }
   };
 
+  //Quick fill functions
+  const fillAdmin = () => {
+    setEmail("Admin@admin.com");
+    setPassword("admin");
+  }
+  const fillNonAdmin = () => {
+    setEmail("test@test.com");
+    setPassword("test");
+  }
+
   return (
     <div className="login-container">
       <div className="form-card">
@@ -52,6 +62,8 @@ const Login = ({ onLoginSuccess }) => {
         <p className="mt-3">
           New user? <a href="/register">Register</a>
         </p>
+        <p style={{ color: "blue", cursor: "pointer" }} onClick={fillNonAdmin}>Set Non Admin credentials</p>
+        <p style={{ color: "blue", cursor: "pointer" }} onClick={fillAdmin}>Set Admin credentials</p>
       </div>
     </div>
   );
