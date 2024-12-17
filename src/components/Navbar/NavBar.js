@@ -2,7 +2,7 @@ import React from "react";
 import "./NavBar.css";
 import { useNavigate } from "react-router-dom";
 
-const NavBar = ({ setSearchTerm }) => {
+const NavBar = ({ user }) => {
   const navigate = useNavigate();
 
   return (
@@ -15,12 +15,19 @@ const NavBar = ({ setSearchTerm }) => {
 
         {/* Login button */}
         <div className="d-flex justify content-end">
+          {user ? (
+            <span className="navbar-test me-3" style={{ fontWeight: "bold" }}>
+              {user.email}
+            </span> 
+          ) : (
           <button
             className="btn btn-primary"
             onClick={() => navigate("/login")}
           >
             Login
           </button>
+
+          )}
         </div>
       </div>
     </nav>

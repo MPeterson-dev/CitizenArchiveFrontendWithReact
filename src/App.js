@@ -18,6 +18,7 @@ const App = () => {
   const [error, setError] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [user, setUser] = useState(null); //store user info
 
   const navigate = useNavigate();
   const location = useLocation(); // To track the current route
@@ -49,12 +50,13 @@ const App = () => {
   const handleLoginSuccess = (user) => {
     setIsAuthenticated(true);
     setIsAdmin(user.isAdmin);
+    setUser(user); //Update user state (logged in or null)
     navigate("/");
   };
 
   return (
     <div>
-      <NavBar />
+      <NavBar user={user}/>
       <main className="main-container mt-4">
         <div className="search-and-subjects">
           {/* Conditionally render the search bar only on the home page */}
