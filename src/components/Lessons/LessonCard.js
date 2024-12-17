@@ -1,28 +1,49 @@
-import React, { useState } from "react";
-import './LessonCard.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./LessonCard.css";
 
-const LessonCard = ({ lessonData }) => {
-    const { title, description, videoUrl } = lessonData;
-    const [ upvotes, setUpvotes ] = useState(0);
-    const [ comments, setComments ] = useState([]);
-    const [ commentText, setCommentText ] = useState('');
+const LessonCard = ({ lessonData, isAuthenticated, currentUser }) => {
+    const { id, title, description, video_url } = lessonData;
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState("");
 
-    const handleUpvote = () => {
-        // Upvote logic here
-        setUpvotes(upvotes + 1);
-    };
+    // Fetch comments for the lesson
+    useEffect(() => {
+        const fetchComments = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/comments/${id}`);
+                setComments(response.data);
+            } catch (err) {
+                console.error("Error fetching comments:", err);
+            }
+        };
+        fetchComments();
+    }, [id]);
 
-    const handleCommentSubmit = (e) => {
+    // Submit a new comment
+    const handleCommentSubmit = async (e) => {
         e.preventDefault();
-        if(commentText.trim()){
-            setComments([...comments, commentText]);
-            setCommentText('');
-        }
-    };
 
-    const handleReport = () => {
-        //Report logic here
-        alert('This lesson has been reported for review.');
+        if (!newComment.trim()) {
+            alert("Comment cannot be empty.");
+            return;
+        }
+
+        try {
+            const response = await axios.post("http://localhost:5000/api/comments", {
+                lesson_id: id,
+                username: currentUser, // Use current logged-in user's username
+                text: newComment.trim(),
+            });
+
+            if (response.data.success) {
+                // Append the new comment to the comments array
+                setComments([...comments, { username: currentUser, text: newComment.trim(), created_at: new Date().toISOString() }]);
+                setNewComment(""); // Clear the input
+            }
+        } catch (err) {
+            console.error("Error adding comment:", err);
+        }
     };
 
     return (
@@ -30,46 +51,43 @@ const LessonCard = ({ lessonData }) => {
             {/* Video Area */}
             <div className="video-container">
                 <iframe
-                src={videoUrl}
-                title={title}
-                frameBorder="0"
-                allowFullScreen
+                    src={video_url}
+                    title={title}
+                    frameBorder="0"
+                    allowFullScreen
                 ></iframe>
             </div>
 
-            {/* Lesson details */}
+            {/* Lesson Details */}
             <div className="lesson-details">                
                 <p>{description}</p>
             </div>
 
-            {/* Interactions row */ }
-            <div className="lesson-interactions">
-                <button className="upvote-button" onClick={handleUpvote}>
-                👍 {upvotes}
-                </button>
-                <button className="report-button" onClick={handleReport}>
-                🚩 Report
-                </button>
-            </div>
-
-            {/* Comments section */}
+            {/* Comments Section */}
             <div className="lesson-comments">
                 <h3>Comments</h3>
                 <ul>
                     {comments.map((comment, index) => (
-                        <li key={index}>{comment}</li>
+                        <li key={index}>
+                            <strong>{comment.username}:</strong> {comment.text}
+                        </li>
                     ))}
                 </ul>
-                <form onSubmit={handleCommentSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Add a comment..."
-                        value={commentText}
-                        onChange={(e) => setCommentText(e.target.value)}
-                        required
+
+                {/* Show the comment form only if the user is authenticated */}
+                {isAuthenticated ? (
+                    <form onSubmit={handleCommentSubmit}>
+                        <textarea
+                            placeholder="Add a comment..."
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                            required
                         />
                         <button type="submit">Submit</button>
-                </form>
+                    </form>
+                ) : (
+                    <p>You must be logged in to add a comment.</p>
+                )}
             </div>
         </div>
     );
