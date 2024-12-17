@@ -51,7 +51,12 @@ const App = () => {
     setIsAuthenticated(true);
     setIsAdmin(user.isAdmin);
     setUser(user); //Update user state (logged in or null)
+
+    if(user.isAdmin){
+      navigate("/admin");
+    }else{
     navigate("/");
+    }
   };
 
   return (
